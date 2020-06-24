@@ -318,6 +318,8 @@ public class nn1 {
         String path2csv_in_drive = args[0];
         int epoch = Integer.parseInt(args[1]);
         int lr = Integer.parseInt(args[2]);
+        int stats = Integer.parseInt(args[3]);
+
 //        String path_on_local_machine = "C:\\Users\\Mehdi\\eclipse-workspace\\we\\src\\mnist_784.csv";
 
         //delimiter
@@ -398,7 +400,7 @@ public class nn1 {
                 }
             }
             br.close();
-            System.out.println( "Dataset Successfully Read!" );
+            System.out.println( "\nDataset Successfully Loaded!" );
 
         } catch( IOException ioe )
         {
@@ -435,8 +437,9 @@ public class nn1 {
         data_ytes = null;
 
         double data_mean = mean( X );
-        System.out.println( "A1 mean: " + data_mean + " Standard Dev: " + std_deviation( X, data_mean ));
-
+        if (stats==1) {
+            System.out.println("A1 mean: " + data_mean + " Standard Dev: " + std_deviation(X, data_mean));
+        }
         //W1 shape: (64, 784)
         //b1 shape: (64, 1)
         //W2 shape: (10, 64)
@@ -496,8 +499,10 @@ public class nn1 {
        double db1_m = mean( db1 );
 
        //for debug
-       System.out.println( "(Initialization) db1 mean: " + db1_m + " Standard Dev: " + std_deviation( db1, db1_m ));
-
+          if (stats==1)
+          {
+              System.out.println("(Initialization) db1 mean: " + db1_m + " Standard Dev: " + std_deviation(db1, db1_m));
+          }
 
        W2 = W2.minus( dW2.times( l_rate ));
        b2 = b2.minus( db2.times( l_rate ));
@@ -506,17 +511,22 @@ public class nn1 {
 
        if(i%2==0)
        {
-           System.out.println( "Epoch: " + i + "    loss: " + loss + "\n\n" );
+
            double mean = mean( W1 );
-           System.out.println( "W1->Mean: " + mean + " Standard Dev: " + std_deviation( W1, mean ));
            mean = mean( W2 );
-           System.out.println( "W2->Mean: " + mean + " Standard Dev: " + std_deviation( W2,mean ));
            mean = mean( b1 );
-           System.out.println( "b1->Mean: " + mean + " Standard Dev: " + std_deviation( b1,mean ));
            mean = mean( b2 );
-           System.out.println( "b2->Mean: " + mean + " Standard Dev: " + std_deviation( b2,mean ));
            mean = mean( A1 );
-            System.out.println( "A1 mean: " + mean + " Standard Dev: " + std_deviation( A2,mean ));
+
+           if (stats==1)
+           {
+               System.out.println("Epoch: " + i + "    loss: " + loss + "\n\n");
+               System.out.println("W1->Mean: " + mean + " Standard Dev: " + std_deviation(W1, mean));
+               System.out.println("W2->Mean: " + mean + " Standard Dev: " + std_deviation(W2, mean));
+               System.out.println("b1->Mean: " + mean + " Standard Dev: " + std_deviation(b1, mean));
+               System.out.println("b2->Mean: " + mean + " Standard Dev: " + std_deviation(b2, mean));
+               System.out.println("A1 mean: " + mean + " Standard Dev: " + std_deviation(A2, mean));
+           }
        }
       }
       System.out.print( "\nFinal loss: " + loss );
