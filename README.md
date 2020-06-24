@@ -10,7 +10,7 @@ lr = 1
 
 78.67% --> 100 epochs
 80%    --> 200 epochs
->90%   --> 1000 epochs
+>90%   --> 1000 epochs  (One run gave 91% whereas other 89.7, this variation is due to random weight initialization)
 >97%   --> 3000 epohs
 ```
 
