@@ -520,15 +520,19 @@ public class nn1 {
 
            if (stats==1)
            {
-               System.out.println("Epoch: " + i + "    loss: " + loss + "\n\n");
+
                System.out.println("W1->Mean: " + mean + " Standard Dev: " + std_deviation(W1, mean));
                System.out.println("W2->Mean: " + mean + " Standard Dev: " + std_deviation(W2, mean));
                System.out.println("b1->Mean: " + mean + " Standard Dev: " + std_deviation(b1, mean));
                System.out.println("b2->Mean: " + mean + " Standard Dev: " + std_deviation(b2, mean));
                System.out.println("A1 mean: " + mean + " Standard Dev: " + std_deviation(A2, mean));
            }
+
+           System.out.println("Epoch: " + i + "    loss: " + loss + "\n\n");
        }
       }
+
+
       System.out.print( "\nFinal loss: " + loss );
 
         //TEST
